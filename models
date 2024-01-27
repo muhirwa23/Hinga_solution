@@ -1,0 +1,54 @@
+from flask import Flask, render_template, request, jsonify
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.compose import ColumnTransformer
+import tensorflow as tf
+
+app = Flask(__name__)
+
+# Define the categories
+crops = ['Maize', 'Wheat', 'Rice', 'Soybeans']
+farming_types = ['Conventional', 'Organic', 'Hydroponic', 'Vertical']
+districts = ['Bugesera', 'Gatsibo', 'Kayonza', 'Kirehe', 'Ngoma', 'Nyagatare', 'Rwamagana', 'Kicukiro', 'Gasabo', 'Nyarugenge', 'Burera', 'Gakenke', 'Gicumbi', 'Musanze', 'Rulindo', 'Gisagara', 'Huye', 'Kamonyi','Muhanga','Nyamagabe', 'Nyanza', 'Nyaruguru', 'Ruhango', 'Karongi', 'Ngororero', 'Nyabihu', 'Nyamasheke', 'Rubavu', 'Rusizi', 'Rutsiro']
+fertilizers = ['Urea', 'DAP', 'MOP', 'NPK']
+soil_types = ['Loamy', 'Sandy', 'Silty', 'Clay']
+
+# Load the trained model
+model = tf.keras.models.load_model('your_model_path')  # Update with the path to your trained model
+
+# Define preprocessor
+preprocessor = ColumnTransformer(
+    transformers=[
+        ('num', StandardScaler(), ['Area']),
+        ('cat', OneHotEncoder(), ['Crop', 'Farming Type', 'District', 'Fertilizer', 'Soil Type'])
+    ])
+
+# Render the home page with the form
+@app.route('/')
+def home():
+    return render_template('index.html', crops=crops, farming_types=farming_types, districts=districts, fertilizers=fertilizers, soil_types=soil_types)
+
+# Handle the form submission
+@app.route('/predict', methods=['POST'])
+def predict():
+    # Get user input from the form
+    user_input = request.form.to_dict()
+    
+    # Create a DataFrame from user input
+    input_data = pd.DataFrame([user_input])
+    
+    # Preprocess the features
+    input_features = preprocessor.transform(input_data).toarray()
+    
+    # Make predictions
+    prediction = model.predict(input_features)
+    
+    # Display the predicted yield
+    predicted_yield = prediction[0][0]
+    
+    return render_template('result.html', predicted_yield=predicted_yield)
+
+if __name__ == '__main__':
+    app.run(debug=True)
