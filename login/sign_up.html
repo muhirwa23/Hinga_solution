@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Sign up</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css" 
+  integrity="sha512-W/zrbCncQnky/EzL+/AYwTtosvrM+YG/V6piQLSe2HuKS6cmbw89kjYkp3tWFn1dkWV7L1ruvJyKbLz73Vlgfg=="
+   crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="stylesheet" href="sign_up.css">
+  <script src="https://kit.fontawesome.com/a6518f2b3a.js"></script> 
+
+  <style>
+
+*{
+    font-family: Source Sans Pro;
+  }
+
+  .nav_bar{
+    display: flex; 
+  }
+
+
+  /* Basic styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+
+  /* Styling the list items */
+  
+  li {
+    padding: 15px;
+    list-style: none;
+    margin-left: 700px;
+  }
+
+  ul li a{
+      text-decoration: none;
+  }
+
+  /* Styling the dropdown menu */
+  .dropdown {
+    position: relative;
+  }
+
+  /* Styling the dropdown content */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    min-width: 160px;
+    z-index: 1;
+  }
+
+  /* Styling the dropdown items */
+  .dropdown-content a {
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  /* Styling the dropdown items on hover */
+  .dropdown-content a:hover {
+    background-color: #04aa6d;
+    color: #fff;
+  }
+
+  /* Show the dropdown content when hovering over the dropdown */
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+    .login_page{
+        margin:  auto 400px;
+        margin-top: 60px;
+
+    }
+    
+    
+    .login_page h3{
+        color: #282a35;
+        font-size: 29px;
+        font-weight: 700;
+    }
+
+    
+    .login_page .p{
+        font-size: 16px;
+        font-weight: 600;
+        margin: 30px 0 0;
+    }
+
+    .login_page .sign_up{
+        color: #04aa6d;
+    }
+    
+    a{
+    text-decoration: none;
+    }
+
+    .login_page span{  
+        margin-left: 160px;
+        font-size: 13px;
+        
+}  
+
+    
+
+    input[type="text"]{
+        height: 50px;
+        width: 200px; 
+        padding-left: 30px;
+        padding-right: 30px;
+        border: 1px solid #d9212c;
+        border-radius: 4px;
+        box-shadow: 0 0 0 1px #d9212c40;
+        
+}
+
+input[type="text"]:focus{
+    box-shadow: 0 0 0 3.2px #d9212c40;
+    background-color: #fff;
+    border: 1px solid #80bdff;
+    outline: none;
+
+}       
+
+    
+    .button{        
+        text-align: center;
+        box-sizing: border-box;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: 600;        
+        background-color: #04aa6d;
+        border-radius: 25px;      
+    }
+
+    .button a{
+        color: #fff;
+
+    }
+
+    input[type="text"],
+    button {
+      padding: 10px;
+      width: 400px; 
+      box-sizing: border-box; 
+      margin-bottom: 10px;   
+      border: 0;
+      
+    }
+
+    /*css for google and fb btn*/
+
+    .or_btn_lines {
+      margin: auto 32px;
+    }
+    
+    
+
+    .cont_with_google,.cont_with_fb{
+      border: 1px solid #04aa6d;
+      border-radius: 25px;
+      color: black;
+    }
+    .cont_with_google a,.cont_with_fb a{
+      color: black;
+    }
+
+
+
+  </style>
+
+</head>
+<body>
+
+    <nav class="nav_bar">
+
+        <div class="img"><img src="hinga-ltd.webp" style="width: 200px;"></div>
+
+        <div><ul>
+            <li class="dropdown">
+              <a href="sign_up.html">English <span><i class="fa fa-chevron-down"></i></span></a>
+              <div class="dropdown-content">
+                <a href="guhanga_konti.html">Kinyarwanda</a>
+              </div>
+            </li>
+          </ul>
+        </div>  
+
+    </nav>
+
+    
+
+
+
+    
+    
+    <div class="login_page">
+        <h3>Sign up</h3>
+        <p><span class="p">Names</span></p> 
+        <p><input type="text"></p>
+
+        <p class="p">Telephone</p>
+        <p><input type="text"></p>
+
+        <p class="p">Password</p>
+        <p><input type="text"></p>
+        
+        <button class="button"><a href="login.html">Create account</a></button>
+
+
+
+        <!--codes for google and fb btn -->
+
+        <div class="or_btn_lines">
+      
+          <p><span class="line"></span>Or</p>
+        
+        </div>
+
+        <button class="cont_with_google"><i class="fa fa-google" style="margin-right: 10px;"></i><a href="#">Continue with Google</button>
+        <button class="cont_with_fb"><i class="fa fa-facebook" style="margin-right: 10px;"></i><a href="#">Continue with facebook</button>
+    </div>
+
+</body>
+</html>

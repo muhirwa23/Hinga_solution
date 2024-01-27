@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <title>HINGA AGRO TECH - User Account</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .user-details {
+      text-align: center;
+    }
+
+    .links-section {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .link-btn {
+      margin: 10px;
+    }
+
+    .logout-btn {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="user-details">
+      <h1>Welcome, User!</h1>
+      <p>Email: user@example.com</p>
+      <!-- Add more user details here -->
+    </div>
+
+    <div class="links-section">
+      <h2>Quick Links:</h2>
+      <a href="#" class="btn btn-primary link-btn" >Data Collection</a>
+      <a href="#" class="btn btn-success link-btn">Prediction</a>
+      <!-- Replace "#" with actual URLs or relevant content -->
+    </div>
+
+    <button class="btn btn-danger logout-btn" onclick="logout()" href=>Logout</button>
+  </div>
+
+  <script>
+    function logout() {
+      // Perform logout actions, such as redirecting to the login page
+      alert('Logout successful!'); // You might want to redirect to the login page here
+    }
+  </script>
+</body>
+</html>

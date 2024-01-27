@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <title>HINGA AGRO TECH</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-container {
+      text-align: center;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card mt-5">
+          <div class="card-header">
+            <h1 class="text-center">HINGA AGRO TECH</h1>
+          </div>
+          <div class="card-body">
+            <form id="signupForm">
+              <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" required>
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" required>
+              </div>
+
+              <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" id="password" required>
+              </div>
+
+              <div class="form-group">
+                <label for="confirmPassword">Confirm Password:</label>
+                <input type="password" class="form-control" id="confirmPassword" required>
+              </div>
+
+              <button type="button" class="btn btn-primary btn-block" onclick="signup()">Sign Up</button>
+            </form>
+
+            <p class="text-center mt-3">Already have an account? <a href="#" onclick="showSignIn()">Sign In</a></p>
+          </div>
+        </div>
+
+        <div class="card mt-5 hidden" id="signInForm">
+          <div class="card-header">
+            <h1 class="text-center">HINGA AGRO TECH</h1>
+          </div>
+          <div class="card-body">
+            <form id="loginForm">
+              <div class="form-group">
+                <label for="loginEmail">Email:</label>
+                <input type="email" class="form-control" id="loginEmail" required>
+              </div>
+
+              <div class="form-group">
+                <label for="loginPassword">Password:</label>
+                <input type="password" class="form-control" id="loginPassword" required>
+              </div>
+
+              <button type="button" class="btn btn-primary btn-block" onclick="signin()" href="user.html">Sign In</button>
+            </form>
+
+            <p class="text-center mt-3">New to HINGA AGRO TECH? <a href="#" onclick="showSignUp()">Sign Up</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    async function signup() {
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      // Simulate API request to the server
+      const response = await fetch('/api/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email, password }),
+      });
+
+      if (response.ok) {
+        alert('Signup successful!'); // You might want to redirect to a login page here
+      } else {
+        alert('Signup failed. Please try again.');
+      }
+    }
+
+    async function signin() {
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+
+      // Simulate API request to the server
+      const response = await fetch('/api/signin', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (response.ok) {
+        alert('Login successful!'); // You might want to redirect to a dashboard here
+      } else {
+        alert('Login failed. Please check your credentials.');
+      }
+    }
+
+    function showSignIn() {
+      document.getElementById('signupForm').reset();
+      document.getElementById('signInForm').classList.remove('hidden');
+      document.getElementById('signupForm').classList.add('hidden');
+    }
+
+    function showSignUp() {
+      document.getElementById('loginForm').reset();
+      document.getElementById('signupForm').classList.remove('hidden');
+      document.getElementById('signInForm').classList.add('hidden');
+    }
+  </script>
+</body>
+</html>

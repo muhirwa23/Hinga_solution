@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Yield and Budget Prediction</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/linear-regression"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        h2 {
+            color: #007bff;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        #predictionResult {
+            margin-top: 20px;
+            text-align: center;
+            font-weight: bold;
+            color: #28a745;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <h2 class="text-center">Yield and Budget Prediction</h2>
+                <form id="predictionForm">
+                    <div class="form-group">
+                        <label for="cropType">Crop Type:</label>
+                        <input type="text" class="form-control" id="cropType" placeholder="Enter the crop type"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="landArea">Land Area (in acres):</label>
+                        <input type="number" class="form-control" id="landArea" placeholder="Enter the land area"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="investment">Budget for Farming (in USD):</label>
+                        <input type="number" class="form-control" id="investment" placeholder="Enter the budget"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="season">Season:</label>
+                        <select class="form-control" id="season" required>
+                            <option value="dry">Dry Season</option>
+                            <option value="wet">Wet Season</option>
+                            <option value="mixed">Mixed Season</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="district">District:</label>
+                        <input type="text" class="form-control" id="district" placeholder="Enter the district" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="soilType">Type of Soil:</label>
+                        <select class="form-control" id="soilType" required>
+                            <option value="clay">Clay Soil</option>
+                            <option value="sand">Sand Soil</option>
+                            <option value="loam">Loam Soil</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="selectedCrops">Crops:</label>
+                        <input type="text" class="form-control" id="selectedCrops"
+                            placeholder="Enter the selected crops" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fertilizerType">Type of Fertilizers:</label>
+                        <input type="text" class="form-control" id="fertilizerType"
+                            placeholder="Enter the type of fertilizers" required>
+                    </div>
+                    <button type="button" class="btn btn-primary btn-block"
+                        onclick="predictResult()">Predict</button>
+                </form>
+                <div id="predictionResult"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let model;
+
+        // Dummy training data
+        const data = [{ features: 1 }, { features: 2 }, { features: 3 }];
+        const labels = [1, 2, 3];
+
+        // Train the model (replace with your actual model training logic)
+        async function trainModel() {
+            model = await tf.loadLayersModel('path/to/your/model.json');
+            await model.fit(tf.tensor2d(data.map(d => d.features)), tf.tensor1d(labels), { epochs: 10 });
+        }
+
+        // Make a prediction based on user input
+        function predictResult() {
+            if (!model) {
+                alert('Model not trained yet. Please train the model first.');
+                return;
+            }
+
+            const inputValues = getInputValues();
+            const prediction = model.predict(tf.tensor2d([inputValues]));
+            const result = prediction.dataSync()[0];
+
+            displayResult(result);
+        }
+
+        function displayResult(result) {
+            const resultDiv = document.getElementById('predictionResult');
+            resultDiv.innerHTML = `<h4>Predicted Result: ${result}</h4>`;
+        }
+
+        function getInputValues() {
+            return {
+                cropType: document.getElementById('cropType').value,
+                landArea: parseFloat(document.getElementById('landArea').value),
+                investment: parseFloat(document.getElementById('investment').value),
+                season: document.getElementById('season').value,
+                district: document.getElementById('district').value,
+                soilType: document.getElementById('soilType').value,
+                selectedCrops: document.getElementById('selectedCrops').value,
+                fertilizerType: document.getElementById('fertilizerType').value,
+            };
+        }
+
+        // Train the model on page load
+        trainModel();
+    </script>
+</body>
+
+</html>
